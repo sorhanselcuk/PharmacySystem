@@ -18,12 +18,20 @@ namespace Business.Concrete
             _automatStockInformationDal = automatStockInformationDal;
         }
 
-        public IDataResult<AutomatStockInformation> GetById(int automatId)
+        public IDataResult<AutomatStockInformation> GetByDrugId(int drugId)
         {
-            var data = _automatStockInformationDal.Get(a => a.AutomatId == automatId);
+            var data = _automatStockInformationDal.GetAll(a => a.DrugId == drugId);
             if (data is null)
                 return new ErrorDataResult<AutomatStockInformation>();
-            return new SuccessDataResult<AutomatStockInformation>(data);
+            return new SuccessDataResult<AutomatStockInformation>();
+        }
+
+        public IDataResult<List<AutomatStockInformation>> GetById(int automatId)
+        {
+            var data = _automatStockInformationDal.GetAll(a => a.AutomatId == automatId);
+            if (data is null)
+                return new ErrorDataResult<List<AutomatStockInformation>>();
+            return new SuccessDataResult<List<AutomatStockInformation>>(data);
         }
     }
 }

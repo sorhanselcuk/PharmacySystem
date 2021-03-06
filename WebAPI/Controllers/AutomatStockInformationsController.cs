@@ -28,5 +28,15 @@ namespace WebAPI.Controllers
                 return BadRequest(result.Message);
             return Ok(result);
         }
+
+        [HttpGet]
+        [Route("[action]")]
+        public IActionResult GetByDrugId(int id)
+        {
+            var result = _automatStockInformationService.GetByDrugId(id);
+            if (!result.Success)
+                return BadRequest(result.Message);
+            return Ok(result);
+        }
     }
 }
