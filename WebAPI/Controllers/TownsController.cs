@@ -43,7 +43,7 @@ namespace WebAPI.Controllers
         [Route("[action]")]
         public IActionResult GetTownById(int townId)
         {
-            var result = _townService.GetTownById();
+            var result = _townService.GetTownById(townId);
             if (!result.Success)
                 return BadRequest(result.Message);
             return Ok(result);
