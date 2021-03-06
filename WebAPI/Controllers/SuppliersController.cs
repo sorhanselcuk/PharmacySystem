@@ -39,6 +39,15 @@ namespace WebAPI.Controllers
                 return BadRequest(result.Message);
             return Ok(result.Message);
         }
+        [HttpPost]
+        [Route("[action]")]
+        public IActionResult Delete(int supplierId)
+        {
+            var result = _supplierService.Delete(new Supplier { Id=supplierId });
+            if (!result.Success)
+                return BadRequest(result.Message);
+            return Ok(result.Message);
+        }
 
         [HttpGet]
         [Route("[action]")]

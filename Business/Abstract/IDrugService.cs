@@ -8,6 +8,7 @@ namespace Business.Abstract
     {
         IResult Add(Drug drug);
         IResult Update(Drug drug);
+        IResult Delete(Drug drug);
         IDataResult<List<Drug>> GetDrugs();
         IDataResult<List<Drug>> GetDrugsBySupplierId(int supplierId);
         IDataResult<List<Drug>> GetDrugsWithPrescription();

@@ -38,6 +38,15 @@ namespace WebAPI.Controllers
                 return BadRequest(result.Message);
             return Ok(result.Message);
         }
+        [HttpPost]
+        [Route("[action]")]
+        public IActionResult Delete(int drugId)
+        {
+            var result = _drugService.Delete(new Drug { Id=drugId });
+            if (!result.Success)
+                return BadRequest(result.Message);
+            return Ok(result.Message);
+        }
 
         [HttpGet]
         [Route("[action]")]

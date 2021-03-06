@@ -24,6 +24,12 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        public IResult Delete(Drug drug)
+        {
+            _drugDal.Delete(drug);
+            return new SuccessResult();
+        }
+
         public IDataResult<List<Drug>> GetDrugs()
         {
             var data = _drugDal.GetAll();

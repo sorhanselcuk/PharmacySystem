@@ -24,6 +24,12 @@ namespace Business.Concrete
             return new SuccessResult();
         }
 
+        public IResult Delete(Supplier supplier)
+        {
+            _supplierDal.Delete(supplier);
+            return new SuccessResult();
+        }
+
         public IDataResult<List<Supplier>> GetSuppliers()
         {
             var data = _supplierDal.GetAll();
