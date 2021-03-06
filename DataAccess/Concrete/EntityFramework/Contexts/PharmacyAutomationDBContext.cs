@@ -16,5 +16,9 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
 
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Drug> Drugs { get; set; }
+        public DbSet<Automat> Automats { get; set; }
+        public DbSet<AutomatStockInformation> AutomatStockInformations { get; set; }
+        public DbSet<City> Cities { get; set; }
+        public DbSet<Town> Towns { get; set; }
     }
 }

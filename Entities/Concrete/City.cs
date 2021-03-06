@@ -5,11 +5,9 @@ using System.Text;
 
 namespace Entities.Concrete
 {
-    public class Supplier:IEntity
+    public class City:IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Email { get; set; }
-        public bool IsActive { get; set; }
     }
 }

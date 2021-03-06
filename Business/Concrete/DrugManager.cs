@@ -46,7 +46,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Drug>> GetDrugsWithoutPrescription()
         {
-            var data = _drugDal.GetAll(d=>d.IsPrescrpiton==true);
+            var data = _drugDal.GetAll(d=>d.IsPrescription==true);
             if (data is null)
             {
                 return new ErrorDataResult<List<Drug>>();
@@ -56,7 +56,7 @@ namespace Business.Concrete
 
         public IDataResult<List<Drug>> GetDrugsWithPrescription()
         {
-            var data = _drugDal.GetAll(d => d.IsPrescrpiton == true);
+            var data = _drugDal.GetAll(d => d.IsPrescription == true);
             if (data is null)
             {
                 return new ErrorDataResult<List<Drug>>();
