@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -21,13 +22,13 @@ namespace Business.Concrete
         public IResult Add(Supplier supplier)
         {
             _supplierDal.Add(supplier);
-            return new SuccessResult();
+            return new SuccessResult(Message.Success);
         }
 
         public IResult Delete(Supplier supplier)
         {
             _supplierDal.Delete(supplier);
-            return new SuccessResult();
+            return new SuccessResult(Message.Success);
         }
 
         public IDataResult<List<Supplier>> GetSuppliers()
@@ -35,15 +36,15 @@ namespace Business.Concrete
             var data = _supplierDal.GetAll();
             if(data is null)
             {
-                return new ErrorDataResult<List<Supplier>>();
+                return new ErrorDataResult<List<Supplier>>(Message.ThereIsNoSuchData);
             }
-            return new SuccessDataResult<List<Supplier>>(data);
+            return new SuccessDataResult<List<Supplier>>(data,Message.Success);
         }
 
         public IResult Update(Supplier supplier)
         {
             _supplierDal.Update(supplier);
-            return new SuccessResult();
+            return new SuccessResult(Message.Success);
         }
     }
 }

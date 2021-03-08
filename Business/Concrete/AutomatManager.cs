@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -21,43 +22,43 @@ namespace Business.Concrete
         public IResult Add(Automat automat)
         {
             _automatDal.Add(automat);
-            return new SuccessResult("Automat was successfully added!");
+            return new SuccessResult(Message.AutomatSuccessfullyAdded);
         }
 
         public IResult Delete(Automat automat)
         {
             _automatDal.Delete(automat);
-            return new SuccessResult("Automat was successfully deleted!");
+            return new SuccessResult(Message.AutomatSuccessfullyDeleted);
         }
 
         public IDataResult<List<Automat>> GetAll()
         {
             var data = _automatDal.GetAll();
             if (data is null)
-                return new ErrorDataResult<List<Automat>>();
-            return new SuccessDataResult<List<Automat>>(data);
+                return new ErrorDataResult<List<Automat>>(Message.ThereIsNoSuchData);
+            return new SuccessDataResult<List<Automat>>(data,Message.Success);
         }
 
         public IDataResult<Automat> GetById(int id)
         {
             var data = _automatDal.Get(a=>a.Id==id);
             if (data is null)
-                return new ErrorDataResult<Automat>();
-            return new SuccessDataResult<Automat>(data);
+                return new ErrorDataResult<Automat>(Message.ThereIsNoSuchData);
+            return new SuccessDataResult<Automat>(data,Message.Success);
         }
 
         public IDataResult<List<Automat>> GetByTownId(int townId)
         {
             var data = _automatDal.GetAll(t=>t.TownId==townId);
             if (data is null)
-                return new ErrorDataResult<List<Automat>>();
-            return new SuccessDataResult<List<Automat>>(data);
+                return new ErrorDataResult<List<Automat>>(Message.ThereIsNoSuchData);
+            return new SuccessDataResult<List<Automat>>(data,Message.Success);
         }
 
         public IResult Update(Automat automat)
         {
             _automatDal.Update(automat);
-            return new SuccessResult("Automat was successfully Updated!");
+            return new SuccessResult(Message.Success);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -18,20 +19,20 @@ namespace Business.Concrete
             _automatStockInformationDal = automatStockInformationDal;
         }
 
-        public IDataResult<AutomatStockInformation> GetByDrugId(int drugId)
+        public IDataResult<List<AutomatStockInformation>> GetByDrugId(int drugId)
         {
             var data = _automatStockInformationDal.GetAll(a => a.DrugId == drugId);
             if (data is null)
-                return new ErrorDataResult<AutomatStockInformation>();
-            return new SuccessDataResult<AutomatStockInformation>();
+                return new ErrorDataResult<List<AutomatStockInformation>>(Message.ThereIsNoSuchData);
+            return new SuccessDataResult<List<AutomatStockInformation>>(data,Message.Success);
         }
 
         public IDataResult<List<AutomatStockInformation>> GetById(int automatId)
         {
             var data = _automatStockInformationDal.GetAll(a => a.AutomatId == automatId);
             if (data is null)
-                return new ErrorDataResult<List<AutomatStockInformation>>();
-            return new SuccessDataResult<List<AutomatStockInformation>>(data);
+                return new ErrorDataResult<List<AutomatStockInformation>>(Message.ThereIsNoSuchData);
+            return new SuccessDataResult<List<AutomatStockInformation>>(data,Message.Success);
         }
     }
 }

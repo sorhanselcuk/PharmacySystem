@@ -7,6 +7,6 @@ namespace Business.Abstract
     public interface IAutomatStockInformationService
     {
         IDataResult<List<AutomatStockInformation>> GetById(int automatId);
-        IDataResult<AutomatStockInformation> GetByDrugId(int drugId);
+        IDataResult<List<AutomatStockInformation>> GetByDrugId(int drugId);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -22,16 +23,16 @@ namespace Business.Concrete
         {
             var data = _cityDal.GetAll();
             if (data is null)
-                return new ErrorDataResult<List<City>>();
-            return new SuccessDataResult<List<City>>(data);
+                return new ErrorDataResult<List<City>>(Message.ThereIsNoSuchData);
+            return new SuccessDataResult<List<City>>(data,Message.Success);
         }
 
         public IDataResult<City> GetCityById(int id)
         {
             var data = _cityDal.Get(c => c.Id == id);
             if (data is null)
-                return new ErrorDataResult<City>();
-            return new SuccessDataResult<City>(data);
+                return new ErrorDataResult<City>(Message.ThereIsNoSuchData);
+            return new SuccessDataResult<City>(data,Message.Success);
         }
     }
 }

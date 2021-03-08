@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.Constants;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -21,13 +22,13 @@ namespace Business.Concrete
         public IResult Add(Drug drug)
         {
             _drugDal.Add(drug);
-            return new SuccessResult();
+            return new SuccessResult(Message.Success);
         }
 
         public IResult Delete(Drug drug)
         {
             _drugDal.Delete(drug);
-            return new SuccessResult();
+            return new SuccessResult(Message.Success);
         }
 
         public IDataResult<List<Drug>> GetDrugs()
@@ -35,9 +36,9 @@ namespace Business.Concrete
             var data = _drugDal.GetAll();
             if (data is null)
             {
-                return new ErrorDataResult<List<Drug>>();
+                return new ErrorDataResult<List<Drug>>(Message.ThereIsNoSuchData);
             }
-            return new SuccessDataResult<List<Drug>>(data);
+            return new SuccessDataResult<List<Drug>>(data,Message.Success);
         }
 
         public IDataResult<List<Drug>> GetDrugsBySupplierId(int supplierId)
@@ -45,9 +46,9 @@ namespace Business.Concrete
             var data = _drugDal.GetAll(d => d.SupplierId == supplierId);
             if (data is null)
             {
-                return new ErrorDataResult<List<Drug>>();
+                return new ErrorDataResult<List<Drug>>(Message.ThereIsNoSuchData);
             }
-            return new SuccessDataResult<List<Drug>>(data);
+            return new SuccessDataResult<List<Drug>>(data,Message.Success);
         }
 
         public IDataResult<List<Drug>> GetDrugsWithoutPrescription()
@@ -55,9 +56,9 @@ namespace Business.Concrete
             var data = _drugDal.GetAll(d=>d.IsPrescription==true);
             if (data is null)
             {
-                return new ErrorDataResult<List<Drug>>();
+                return new ErrorDataResult<List<Drug>>(Message.ThereIsNoSuchData);
             }
-            return new SuccessDataResult<List<Drug>>(data);
+            return new SuccessDataResult<List<Drug>>(data, Message.Success);
         }
 
         public IDataResult<List<Drug>> GetDrugsWithPrescription()
@@ -65,15 +66,15 @@ namespace Business.Concrete
             var data = _drugDal.GetAll(d => d.IsPrescription == true);
             if (data is null)
             {
-                return new ErrorDataResult<List<Drug>>();
+                return new ErrorDataResult<List<Drug>>(Message.ThereIsNoSuchData);
             }
-            return new SuccessDataResult<List<Drug>>(data);
+            return new SuccessDataResult<List<Drug>>(data, Message.Success);
         }
 
         public IResult Update(Drug drug)
         {
             _drugDal.Add(drug);
-            return new SuccessResult();
+            return new SuccessResult(Message.Success);
         }
     }
 }
