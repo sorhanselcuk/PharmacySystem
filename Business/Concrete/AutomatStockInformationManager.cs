@@ -22,7 +22,7 @@ namespace Business.Concrete
         public IDataResult<List<AutomatStockInformation>> GetByDrugId(int drugId)
         {
             var data = _automatStockInformationDal.GetAll(a => a.DrugId == drugId);
-            if (data is null)
+            if (data.Count == 0)
                 return new ErrorDataResult<List<AutomatStockInformation>>(Message.ThereIsNoSuchData);
             return new SuccessDataResult<List<AutomatStockInformation>>(data,Message.Success);
         }
@@ -30,7 +30,7 @@ namespace Business.Concrete
         public IDataResult<List<AutomatStockInformation>> GetById(int automatId)
         {
             var data = _automatStockInformationDal.GetAll(a => a.AutomatId == automatId);
-            if (data is null)
+            if (data.Count == 0)
                 return new ErrorDataResult<List<AutomatStockInformation>>(Message.ThereIsNoSuchData);
             return new SuccessDataResult<List<AutomatStockInformation>>(data,Message.Success);
         }

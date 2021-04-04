@@ -34,7 +34,7 @@ namespace Business.Concrete
         public IDataResult<List<Automat>> GetAll()
         {
             var data = _automatDal.GetAll();
-            if (data is null)
+            if (data.Count==0)
                 return new ErrorDataResult<List<Automat>>(Message.ThereIsNoSuchData);
             return new SuccessDataResult<List<Automat>>(data,Message.Success);
         }
@@ -50,7 +50,7 @@ namespace Business.Concrete
         public IDataResult<List<Automat>> GetByTownId(int townId)
         {
             var data = _automatDal.GetAll(t=>t.TownId==townId);
-            if (data is null)
+            if (data.Count == 0)
                 return new ErrorDataResult<List<Automat>>(Message.ThereIsNoSuchData);
             return new SuccessDataResult<List<Automat>>(data,Message.Success);
         }

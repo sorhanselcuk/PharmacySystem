@@ -22,7 +22,7 @@ namespace Business.Concrete
         public IDataResult<List<Town>> GetAll()
         {
             var data = _townDal.GetAll();
-            if (data is null)
+            if (data.Count == 0)
                 return new ErrorDataResult<List<Town>>(Message.ThereIsNoSuchData);
             return new SuccessDataResult<List<Town>>(data, Message.Success);
         }
@@ -30,7 +30,7 @@ namespace Business.Concrete
         public IDataResult<List<Town>> GetAllByCityId(int cityId)
         {
             var data = _townDal.GetAll(t => t.CityId == cityId);
-            if (data is null)
+            if (data.Count == 0)
                 return new ErrorDataResult<List<Town>>(Message.ThereIsNoSuchData);
             return new SuccessDataResult<List<Town>>(data, Message.Success);
         }

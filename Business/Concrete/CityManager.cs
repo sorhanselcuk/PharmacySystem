@@ -22,7 +22,7 @@ namespace Business.Concrete
         public IDataResult<List<City>> GetAll()
         {
             var data = _cityDal.GetAll();
-            if (data is null)
+            if (data.Count == 0)
                 return new ErrorDataResult<List<City>>(Message.ThereIsNoSuchData);
             return new SuccessDataResult<List<City>>(data,Message.Success);
         }

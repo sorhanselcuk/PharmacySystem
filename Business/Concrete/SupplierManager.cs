@@ -1,5 +1,8 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -19,8 +22,16 @@ namespace Business.Concrete
             _supplierDal = supplierDal;
         }
 
+        [ValidationAspect(typeof(SupplierValidator))]
         public IResult Add(Supplier supplier)
         {
+            var result = BusinessRules.Run(
+                CheckIfSupplierNameExists(supplier.Name),
+                CheckIfSupplierEMailExists(supplier.Email));
+
+            if (result != null)
+                return result;
+
             _supplierDal.Add(supplier);
             return new SuccessResult(Message.Success);
         }
@@ -41,10 +52,32 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Supplier>>(data,Message.Success);
         }
 
+        [ValidationAspect(typeof(SupplierValidator))]
         public IResult Update(Supplier supplier)
         {
+            var result = BusinessRules.Run(
+               CheckIfSupplierNameExists(supplier.Name),
+               CheckIfSupplierEMailExists(supplier.Email));
+
+            if (result != null)
+                return result;
             _supplierDal.Update(supplier);
             return new SuccessResult(Message.Success);
+        }
+        
+        private IResult CheckIfSupplierEMailExists(string eMail)
+        {
+            var result = _supplierDal.Get(s=>s.Email == eMail);
+            if (result is null)
+                return new SuccessResult();
+            return new ErrorResult(Message.SuchAEMailAlreadyExists);
+        }
+        private IResult CheckIfSupplierNameExists(string name)
+        {
+            var result = _supplierDal.Get(s => s.Name == name);
+            if (result is null)
+                return new SuccessResult();
+            return new ErrorResult(Message.SuchDataAlreadyExists);
         }
     }
 }

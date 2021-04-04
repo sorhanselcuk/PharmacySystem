@@ -12,5 +12,7 @@ namespace Business.Constants
         public const string AutomatSuccessfullyAdded = "Automat was successfully added !";
         public const string AutomatSuccessfullyDeleted = "Automat was successfully deleted !";
         public const string AutomatSuccessfullyUpdated = "Automat was successfully updated !";
+        public const string SuchDataAlreadyExists = "Such data already exists !";
+        public const string SuchAEMailAlreadyExists = "Such a E-Mail already exists !";
     }
 }
