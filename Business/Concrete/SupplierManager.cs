@@ -1,15 +1,14 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Security;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Business.Concrete
 {
@@ -22,6 +21,7 @@ namespace Business.Concrete
             _supplierDal = supplierDal;
         }
 
+        [AuthorizationAspect("ISupplierService.Add,ISupplier")]
         [ValidationAspect(typeof(SupplierValidator))]
         public IResult Add(Supplier supplier)
         {
@@ -36,6 +36,7 @@ namespace Business.Concrete
             return new SuccessResult(Message.Success);
         }
 
+        [AuthorizationAspect("ISupplierService.Delete,ISupplier")]
         public IResult Delete(Supplier supplier)
         {
             _supplierDal.Delete(supplier);
@@ -45,13 +46,14 @@ namespace Business.Concrete
         public IDataResult<List<Supplier>> GetSuppliers()
         {
             var data = _supplierDal.GetAll();
-            if(data is null)
+            if (data is null)
             {
                 return new ErrorDataResult<List<Supplier>>(Message.ThereIsNoSuchData);
             }
-            return new SuccessDataResult<List<Supplier>>(data,Message.Success);
+            return new SuccessDataResult<List<Supplier>>(data, Message.Success);
         }
 
+        [AuthorizationAspect("ISupplierService.Update,ISupplier")]
         [ValidationAspect(typeof(SupplierValidator))]
         public IResult Update(Supplier supplier)
         {
@@ -64,10 +66,10 @@ namespace Business.Concrete
             _supplierDal.Update(supplier);
             return new SuccessResult(Message.Success);
         }
-        
+
         private IResult CheckIfSupplierEMailExists(string eMail)
         {
-            var result = _supplierDal.Get(s=>s.Email == eMail);
+            var result = _supplierDal.Get(s => s.Email == eMail);
             if (result is null)
                 return new SuccessResult();
             return new ErrorResult(Message.SuchAEMailAlreadyExists);
