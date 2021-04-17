@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Security;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results.Abstract;
@@ -21,7 +22,7 @@ namespace Business.Concrete
             _drugDal = drugDal;
         }
 
-        //[AuthorizationAspect("IDrugService.Add,IDrugService")]
+        [AuthorizationAspect("IDrugService.Add,IDrugService")]
         [ValidationAspect(typeof(DrugValidator))]
         [CacheRemoveAspect("IDrugService.Get")]
         public IResult Add(Drug drug)
@@ -33,7 +34,7 @@ namespace Business.Concrete
             return new SuccessResult(Message.Success);
         }
 
-        //[AuthorizationAspect("IDrugService.Delete,IDrugService")]
+        [AuthorizationAspect("IDrugService.Delete,IDrugService")]
         [CacheRemoveAspect("IDrugService.Get")]
         public IResult Delete(Drug drug)
         {
@@ -85,7 +86,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Drug>>(data, Message.Success);
         }
 
-        //[AuthorizationAspect("IDrugService.Update,IDrugService")]
+        [AuthorizationAspect("IDrugService.Update,IDrugService")]
         [ValidationAspect(typeof(DrugValidator))]
         [CacheRemoveAspect("IDrugService.Get")]
         public IResult Update(Drug drug)

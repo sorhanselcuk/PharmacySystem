@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Security;
 using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results.Abstract;
@@ -20,7 +21,7 @@ namespace Business.Concrete
             _supplierDal = supplierDal;
         }
 
-        //[AuthorizationAspect("ISupplierService.Add,ISupplier")]
+        [AuthorizationAspect("ISupplierService.Add,ISupplier")]
         [ValidationAspect(typeof(SupplierValidator))]
         public IResult Add(Supplier supplier)
         {
@@ -35,7 +36,7 @@ namespace Business.Concrete
             return new SuccessResult(Message.Success);
         }
 
-        //[AuthorizationAspect("ISupplierService.Delete,ISupplier")]
+        [AuthorizationAspect("ISupplierService.Delete,ISupplier")]
         public IResult Delete(Supplier supplier)
         {
             _supplierDal.Delete(supplier);
@@ -52,7 +53,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Supplier>>(data, Message.Success);
         }
 
-        //[AuthorizationAspect("ISupplierService.Update,ISupplier")]
+        [AuthorizationAspect("ISupplierService.Update,ISupplier")]
         [ValidationAspect(typeof(SupplierValidator))]
         public IResult Update(Supplier supplier)
         {
