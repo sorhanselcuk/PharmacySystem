@@ -1,7 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
 using Core.Aspects.Autofac.Caching;
-using Core.Aspects.Autofac.Security;
 using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
@@ -19,7 +18,7 @@ namespace Business.Concrete
             _automatDal = automatDal;
         }
 
-        [AuthorizationAspect("IAutomatService.Add,IAutomatService")]
+        //[AuthorizationAspect("IAutomatService.Add,IAutomatService")]
         [CacheRemoveAspect("IAutomatService.Get")]
         public IResult Add(Automat automat)
         {
@@ -27,7 +26,7 @@ namespace Business.Concrete
             return new SuccessResult(Message.AutomatSuccessfullyAdded);
         }
 
-        [AuthorizationAspect("IAutomatService.Delete,IAutomatService")]
+        //[AuthorizationAspect("IAutomatService.Delete,IAutomatService")]
         [CacheRemoveAspect("IAutomatService.Get")]
         public IResult Delete(Automat automat)
         {
@@ -61,7 +60,7 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Automat>>(data, Message.Success);
         }
 
-        [AuthorizationAspect("IAutomatService.Add")]
+        //[AuthorizationAspect("IAutomatService.Add")]
         [CacheRemoveAspect("IAutomatService.Update,IAutomatService")]
         public IResult Update(Automat automat)
         {
