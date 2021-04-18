@@ -1,8 +1,10 @@
 ﻿using Autofac;
 using Business.Abstract;
 using Business.Concrete;
+using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using System;
 
 namespace Business.DependencyResolves.Autofac
 {
@@ -12,6 +14,12 @@ namespace Business.DependencyResolves.Autofac
         {
             ManagerLoads(builder);
             EntityFrameworkLoads(builder);
+            UtilitiesLoads(builder);
+        }
+
+        private void UtilitiesLoads(ContainerBuilder builder)
+        {
+            builder.RegisterType<JwtHelper>().As<ITokenHelper>();
         }
 
         private void EntityFrameworkLoads(ContainerBuilder builder)
@@ -22,6 +30,9 @@ namespace Business.DependencyResolves.Autofac
             builder.RegisterType<EfAutomatStockInformationDal>().As<IAutomatStockInformationDal>().SingleInstance();
             builder.RegisterType<EfCityDal>().As<ICityDal>().SingleInstance();
             builder.RegisterType<EfTownDal>().As<ITownDal>().SingleInstance();
+            builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
+            builder.RegisterType<EfUserOperationClaimDal>().As<IUserOperationClaimDal>().SingleInstance();
+            builder.RegisterType<EfOperationClaimDal>().As<IOperationClaimDal>().SingleInstance();
         }
 
         private void ManagerLoads(ContainerBuilder builder)
@@ -32,6 +43,8 @@ namespace Business.DependencyResolves.Autofac
             builder.RegisterType<AutomatStockInformationManager>().As<IAutomatStockInformationService>().SingleInstance();
             builder.RegisterType<CityManager>().As<ICityService>().SingleInstance();
             builder.RegisterType<TownManager>().As<ITownService>().SingleInstance();
+            builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
+            builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
         }
     }
 }

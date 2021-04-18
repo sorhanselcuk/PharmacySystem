@@ -50,7 +50,7 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         [Route("[action]")]
-        public IActionResult GetDrugs()
+        public IActionResult GetAll()
         {
             var result = _drugService.GetDrugs();
             if (!result.Success)
@@ -70,7 +70,7 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         [Route("[action]")]
-        public IActionResult GetDrugsWithPrescriotion()
+        public IActionResult GetDrugsWithPrescription()
         {
             var result = _drugService.GetDrugsWithPrescription();
             if (!result.Success)
@@ -80,7 +80,7 @@ namespace WebAPI.Controllers
 
         [HttpGet]
         [Route("[action]")]
-        public IActionResult GetDrugsWithoutPrescriotion()
+        public IActionResult GetDrugsWithoutPrescription()
         {
             var result = _drugService.GetDrugsWithoutPrescription();
             if (!result.Success)
