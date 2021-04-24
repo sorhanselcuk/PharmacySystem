@@ -43,6 +43,7 @@ namespace Business.Concrete
             return new SuccessResult(Message.Success);
         }
 
+        [AuthorizationAspect(roles:"Admin")]
         public IDataResult<List<Supplier>> GetSuppliers()
         {
             var data = _supplierDal.GetAll();

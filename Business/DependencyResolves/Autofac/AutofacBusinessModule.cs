@@ -1,10 +1,12 @@
 ﻿using Autofac;
+using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
+using Castle.DynamicProxy;
+using Core.Utilities.Interceptors;
 using Core.Utilities.Security.JWT;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
-using DataAccess.Concrete.InMemory;
 using System;
 
 namespace Business.DependencyResolves.Autofac
@@ -16,6 +18,14 @@ namespace Business.DependencyResolves.Autofac
             ManagerLoads(builder);
             EntityFrameworkLoads(builder);
             UtilitiesLoads(builder);
+
+            var assembly = System.Reflection.Assembly.GetExecutingAssembly();
+
+            builder.RegisterAssemblyTypes(assembly).AsImplementedInterfaces()
+                .EnableInterfaceInterceptors(new ProxyGenerationOptions()
+                {
+                    Selector = new AspectInterceptorSelector()
+                }).SingleInstance();
         }
 
         private void UtilitiesLoads(ContainerBuilder builder)
