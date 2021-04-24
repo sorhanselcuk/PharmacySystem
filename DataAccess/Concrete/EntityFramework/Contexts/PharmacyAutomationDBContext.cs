@@ -12,7 +12,7 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(@"Server=(localdb)\MSSQLLocalDB;Database=PharmacyAutomationDB;Trusted_Connection=true");
+            optionsBuilder.UseSqlServer(@"Server=.;Database=PharmacyAutomationDB;Trusted_Connection=false;User Id=pharmacy;Password=pharmacy123");
         }
 
         public DbSet<Supplier> Suppliers { get; set; }
@@ -22,7 +22,7 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<City> Cities { get; set; }
         public DbSet<Town> Towns { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
     }
 }

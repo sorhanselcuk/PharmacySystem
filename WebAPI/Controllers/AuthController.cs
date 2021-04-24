@@ -1,10 +1,13 @@
 ﻿using Business.Abstract;
+using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 using Entities.DTOs;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace WebAPI.Controllers
@@ -20,7 +23,7 @@ namespace WebAPI.Controllers
             _authService = authService;
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("[action]")]
         public ActionResult Login(UserForLoginDto userForLoginDto)
         {
@@ -58,5 +61,7 @@ namespace WebAPI.Controllers
 
             return BadRequest(result.Message);
         }
+
+       
     }
 }

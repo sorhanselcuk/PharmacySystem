@@ -26,8 +26,8 @@ namespace Business.Concrete
         public IResult Add(Supplier supplier)
         {
             var result = BusinessRules.Run(
-                CheckIfSupplierNameExists(supplier.Name),
-                CheckIfSupplierEMailExists(supplier.Email));
+                CheckIfSupplierNameExists(supplier.Name));
+                //CheckIfSupplierEMailExists(supplier.Email));
 
             if (result != null)
                 return result;
@@ -58,8 +58,8 @@ namespace Business.Concrete
         public IResult Update(Supplier supplier)
         {
             var result = BusinessRules.Run(
-               CheckIfSupplierNameExists(supplier.Name),
-               CheckIfSupplierEMailExists(supplier.Email));
+               CheckIfSupplierNameExists(supplier.Name));
+               //CheckIfSupplierEMailExists(supplier.Email));
 
             if (result != null)
                 return result;
@@ -69,9 +69,9 @@ namespace Business.Concrete
 
         private IResult CheckIfSupplierEMailExists(string eMail)
         {
-            var result = _supplierDal.Get(s => s.Email == eMail);
+            /*var result = _supplierDal.Get(s => s.Email == eMail);
             if (result is null)
-                return new SuccessResult();
+                return new SuccessResult();*/
             return new ErrorResult(Message.SuchAEMailAlreadyExists);
         }
         private IResult CheckIfSupplierNameExists(string name)

@@ -9,8 +9,8 @@ namespace Business.ValidationRules.FluentValidation
         {
             RuleFor(s => s.Name).NotEmpty();
             RuleFor(s => s.Name).MinimumLength(10);
-            RuleFor(s => s.Email).NotEmpty();
-            RuleFor(s => s.Email).EmailAddress();
+            //RuleFor(s => s.Email).NotEmpty();
+            //RuleFor(s => s.Email).EmailAddress();
         }
     }
 }
