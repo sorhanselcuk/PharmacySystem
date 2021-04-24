@@ -10,5 +10,6 @@
         public const string AutomatSuccessfullyUpdated = "Automat was successfully updated !";
         public const string SuchDataAlreadyExists = "Such data already exists !";
         public const string SuchAEMailAlreadyExists = "Such a E-Mail already exists !";
+        public const string TheDrugIsNotOwnedByYourCompany = "This drug is not owned by your company.";
     }
 }

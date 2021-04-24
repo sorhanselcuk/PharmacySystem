@@ -1,5 +1,6 @@
 ﻿using Business.Abstract;
 using Business.Constants;
+using Business.Utilities;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Caching;
 using Core.Aspects.Autofac.Security;
@@ -9,6 +10,7 @@ using Core.Utilities.Results.Abstract;
 using Core.Utilities.Results.Concrete;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using System;
 using System.Collections.Generic;
 
 namespace Business.Concrete
@@ -38,10 +40,12 @@ namespace Business.Concrete
         [CacheRemoveAspect("IDrugService.Get")]
         public IResult Delete(Drug drug)
         {
+            var result = BusinessRules.Run(CheckIfOwnerDrug(drug));
+            if (result != null)
+                return result;
             _drugDal.Delete(drug);
             return new SuccessResult(Message.Success);
         }
-
         [CacheAspect(60)]
         public IDataResult<List<Drug>> GetDrugs()
         {
@@ -91,6 +95,9 @@ namespace Business.Concrete
         [CacheRemoveAspect("IDrugService.Get")]
         public IResult Update(Drug drug)
         {
+            var result = BusinessRules.Run(CheckIfOwnerDrug(drug));
+            if (result != null)
+                return result;
             _drugDal.Update(drug);
             return new SuccessResult(Message.Success);
         }
@@ -100,6 +107,14 @@ namespace Business.Concrete
             if (result is null)
                 return new SuccessResult();
             return new ErrorResult(Message.SuchDataAlreadyExists);
+        }
+        private IResult CheckIfOwnerDrug(Drug drug)
+        {
+            if(drug.SupplierId != UserHelper.GetSupplierId())
+            {
+                return new ErrorResult(Message.TheDrugIsNotOwnedByYourCompany);
+            }
+            return new SuccessResult();
         }
     }
 }

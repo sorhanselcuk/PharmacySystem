@@ -2,10 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Entities.Extensions
+namespace Core.Entities
 {
-    public static class UserExtension
+    public interface IView
     {
-        
     }
 }

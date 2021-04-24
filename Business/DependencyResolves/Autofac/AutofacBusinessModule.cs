@@ -44,6 +44,7 @@ namespace Business.DependencyResolves.Autofac
             builder.RegisterType<EfUserDal>().As<IUserDal>().SingleInstance();
             builder.RegisterType<EfUserOperationClaimDal>().As<IUserOperationClaimDal>().SingleInstance();
             builder.RegisterType<EfOperationClaimDal>().As<IOperationClaimDal>().SingleInstance();
+            builder.RegisterType<EfSupplierUserDal>().As<ISupplierUserDal>().SingleInstance();
         }
 
         private void ManagerLoads(ContainerBuilder builder)
@@ -56,6 +57,7 @@ namespace Business.DependencyResolves.Autofac
             builder.RegisterType<TownManager>().As<ITownService>().SingleInstance();
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
             builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
+            builder.RegisterType<SupplierUserManager>().As<ISupplierUserService>().SingleInstance();
         }
     }
 }
