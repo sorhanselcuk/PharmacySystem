@@ -2,6 +2,8 @@
 using Autofac.Extras.DynamicProxy;
 using Business.Abstract;
 using Business.Concrete;
+using Business.ExternalResources.Abstract;
+using Business.ExternalResources.Concrete;
 using Castle.DynamicProxy;
 using Core.Utilities.Interceptors;
 using Core.Utilities.Security.JWT;
@@ -18,6 +20,7 @@ namespace Business.DependencyResolves.Autofac
             ManagerLoads(builder);
             EntityFrameworkLoads(builder);
             UtilitiesLoads(builder);
+            ExternelResourcesLoad(builder);
 
             var assembly = System.Reflection.Assembly.GetExecutingAssembly();
 
@@ -26,6 +29,11 @@ namespace Business.DependencyResolves.Autofac
                 {
                     Selector = new AspectInterceptorSelector()
                 }).SingleInstance();
+        }
+
+        private void ExternelResourcesLoad(ContainerBuilder builder)
+        {
+            builder.RegisterType<MernisIDService>().As<IIDService>();
         }
 
         private void UtilitiesLoads(ContainerBuilder builder)
@@ -45,6 +53,8 @@ namespace Business.DependencyResolves.Autofac
             builder.RegisterType<EfUserOperationClaimDal>().As<IUserOperationClaimDal>().SingleInstance();
             builder.RegisterType<EfOperationClaimDal>().As<IOperationClaimDal>().SingleInstance();
             builder.RegisterType<EfSupplierUserDal>().As<ISupplierUserDal>().SingleInstance();
+            builder.RegisterType<EfPrescriptionDal>().As<IPrescriptionDal>().SingleInstance();
+            builder.RegisterType<EfPrescriptionDetailDal>().As<IPrescriptionDetailDal>().SingleInstance();
         }
 
         private void ManagerLoads(ContainerBuilder builder)
@@ -58,6 +68,8 @@ namespace Business.DependencyResolves.Autofac
             builder.RegisterType<UserManager>().As<IUserService>().SingleInstance();
             builder.RegisterType<AuthManager>().As<IAuthService>().SingleInstance();
             builder.RegisterType<SupplierUserManager>().As<ISupplierUserService>().SingleInstance();
+            builder.RegisterType<PersonManager>().As<IPersonService>().SingleInstance();
+
         }
     }
 }

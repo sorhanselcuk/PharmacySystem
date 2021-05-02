@@ -34,7 +34,7 @@ namespace WebAPI
         {
             services.AddControllers();
             
-            //services.AddCors();
+            services.AddCors();
 
             var tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
 
@@ -67,7 +67,7 @@ namespace WebAPI
             }
             
 
-            //app.UseCors(builder => builder.AllowAnyHeader());
+            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             app.UseHttpsRedirection();
 

@@ -10,5 +10,6 @@ namespace Entities.Concrete
         public bool IsPrescription { get; set; }
         public decimal Price { get; set; }
         public bool IsActive { get; set; }
+        public string TITCKCode { get; set; }
     }
 }

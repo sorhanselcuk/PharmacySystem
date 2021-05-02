@@ -29,7 +29,10 @@ namespace Business.Concrete
         [CacheRemoveAspect("IDrugService.Get")]
         public IResult Add(Drug drug)
         {
-            var result = BusinessRules.Run(CheckIfDrugNameExists(drug.Name));
+            var result = BusinessRules.Run(
+                CheckIfDrugNameExists(drug.Name),
+                CheckIfTITCKCodeExists(drug.TITCKCode));
+
             if (result != null)
                 return result;
             _drugDal.Add(drug);
@@ -95,7 +98,10 @@ namespace Business.Concrete
         [CacheRemoveAspect("IDrugService.Get")]
         public IResult Update(Drug drug)
         {
-            var result = BusinessRules.Run(CheckIfOwnerDrug(drug));
+            var result = BusinessRules.Run(
+                CheckIfOwnerDrug(drug),
+                CheckIfTITCKCodeExists(drug.TITCKCode));
+
             if (result != null)
                 return result;
             _drugDal.Update(drug);
@@ -115,6 +121,13 @@ namespace Business.Concrete
                 return new ErrorResult(Message.TheDrugIsNotOwnedByYourCompany);
             }
             return new SuccessResult();
+        }
+        private IResult CheckIfTITCKCodeExists(string TITCKCode)
+        {
+            var result = _drugDal.Get(d=>d.TITCKCode == TITCKCode);
+            if (result is null)
+                return new SuccessResult();
+            return new ErrorResult(Message.SuchATITCKCodeAlreadyExists);
         }
     }
 }
