@@ -65,9 +65,11 @@ namespace WebAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-            
 
-            app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
+            //app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
+
+            app.UseCors(builder => builder.WithOrigins("192.168.1.23").AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
             app.UseHttpsRedirection();
 

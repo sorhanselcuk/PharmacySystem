@@ -9,5 +9,6 @@ namespace Business.Abstract
     public interface IPrescriptionService
     {
         IResult CreatePrescription(PrescriptionForCreateDto prescriptionForCreateDto);
+        
     }
 }

@@ -74,7 +74,7 @@ namespace Business.Concrete
         [CacheAspect(60)]
         public IDataResult<List<Drug>> GetDrugsWithoutPrescription()
         {
-            var data = _drugDal.GetAll(d => d.IsPrescription == true);
+            var data = _drugDal.GetAll(d => d.IsPrescription == false);
             if (data.Count == 0)
             {
                 return new ErrorDataResult<List<Drug>>(Message.ThereIsNoSuchData);

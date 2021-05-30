@@ -6,4 +6,5 @@ namespace DataAccess.Abstract
     public interface IAutomatDal : IEntityRepository<Automat>
     {
     }
+   
 }

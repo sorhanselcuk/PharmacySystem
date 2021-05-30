@@ -28,5 +28,8 @@ namespace DataAccess.Concrete.EntityFramework.Contexts
         public DbSet<SupplierUser> SupplierUsers { get; set; }
         public DbSet<Prescription> Prescriptions { get; set; }
         public DbSet<PrescriptionDetail> PrescriptionDetails { get; set; }
+        public DbSet<AuthorizationType> AuthorizationTypes { get; set; }
+        public DbSet<SystemOperationClaim> SystemOperationClaims { get; set; }
+        public DbSet<WebOperationClaim> WebOperationClaims { get; set; }
     }
 }

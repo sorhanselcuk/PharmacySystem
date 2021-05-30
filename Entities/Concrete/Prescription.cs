@@ -11,5 +11,7 @@ namespace Entities.Concrete
         public string PatientIdCardNumber { get; set; }
         public string DoctorRegistrationNumber { get; set; }
         public string HealtInstitutionNumber { get; set; }
+        public DateTime Date { get; set; }
+        public DateTime ExpiryDate { get; set; }
     }
 }
