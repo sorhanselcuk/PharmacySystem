@@ -2,7 +2,7 @@
 
 namespace Entities.Concrete
 {
-    public class Drug : IEntity
+    public class Medicine : IEntity
     {
         public int Id { get; set; }
         public int SupplierId { get; set; }

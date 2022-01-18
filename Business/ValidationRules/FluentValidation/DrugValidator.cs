@@ -3,7 +3,7 @@ using FluentValidation;
 
 namespace Business.ValidationRules.FluentValidation
 {
-    public class DrugValidator : AbstractValidator<Drug>
+    public class DrugValidator : AbstractValidator<Medicine>
     {
         public DrugValidator()
         {

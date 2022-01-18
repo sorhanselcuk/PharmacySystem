@@ -5,7 +5,7 @@ using Entities.Concrete;
 
 namespace DataAccess.Concrete.EntityFramework
 {
-    public class EfDrugDal : EfEntityRepositoryBase<Drug, PharmacyAutomationDBContext>, IDrugDal
+    public class EfMedicineDal : EfEntityRepositoryBase<Medicine, PharmacyAutomationDBContext>, IMedicineDal
     {
     }
 }
